@@ -1,0 +1,8 @@
+<abstract>
+Using best practices in vscode extension development design and then implement a new extension. The extension is called focused-views and it is meant to give different roles in a repo a way to quickly focus on the files that matter to them. 
+<requirements>
+1. It should work off of a simple configuration file ".focusedviews" that uses cuelang to define the different views and the files that belong to them. 
+2. A view can also specify a specific git branch to focus on. 
+3. You will need to define the cuelang schema for the configuration file. 
+4. We are making an extension that will add a new primary sidebar item called "Focused Views". 5. In the panel view it will have collapsible sections for each defined view containing only the relevant files. 
+6. Some options for each section are: "Number Files", "View Readme File", "Show Full Path", "Show Git Branch", "Collapse On Open"

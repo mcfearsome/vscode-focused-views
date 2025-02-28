@@ -1,0 +1,60 @@
+// Example configuration for Focused Views extension
+package focusedviews
+
+config: {
+	version: "1.0.0"
+	views: {
+		// Frontend developer view
+		frontend: {
+			name: "Frontend"
+			description: "UI components and client-side code"
+			files: [
+				"src/ui/**/*.ts",
+				"src/ui/**/*.tsx",
+				"src/ui/**/*.css",
+				"src/ui/**/*.scss",
+				"public/**/*"
+			]
+			options: {
+				numberFiles: true
+				viewReadme: true
+				showFullPath: false
+				showGitBranch: true
+				collapseOnOpen: false
+			}
+		}
+		
+		// Backend developer view
+		backend: {
+			name: "Backend"
+			description: "Server-side code and APIs"
+			files: [
+				"src/server/**/*.ts",
+				"src/api/**/*.ts",
+				"src/models/**/*.ts"
+			]
+			gitBranch: "develop"
+			options: {
+				showFullPath: true
+				collapseOnOpen: true
+			}
+		}
+		
+		// DevOps view
+		devops: {
+			name: "DevOps"
+			description: "Configuration and deployment files"
+			files: [
+				"Dockerfile",
+				"docker-compose.yml",
+				".github/workflows/**/*",
+				"scripts/**/*.sh",
+				"config/**/*.json"
+			]
+			options: {
+				viewReadme: true
+				showGitBranch: false
+			}
+		}
+	}
+}

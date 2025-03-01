@@ -1,0 +1,67 @@
+// Example configuration for Focused Views extension
+// showing Git branch integration feature
+{
+  "version": "1.0.0",
+  
+  "views": {
+    // View showing files from the main branch
+    "main": {
+      "name": "Main Branch Code",
+      "description": "Stable code from the main branch",
+      "files": [
+        "src/**/*.ts"
+      ],
+      "gitBranch": "main",
+      "options": {
+        "numberFiles": true,
+        "showGitBranch": true,
+        "collapseOnOpen": false,
+        "allowDirectEdits": false  // Edits to these files will create a new branch for PR
+      }
+    },
+    
+    // View showing files from a feature branch
+    "feature": {
+      "name": "Feature Implementation",
+      "description": "Code from your feature branch",
+      "files": [
+        "src/**/*.ts"
+      ],
+      "gitBranch": "feature/new-feature",
+      "options": {
+        "showFullPath": true,
+        "showGitBranch": true,
+        "allowDirectEdits": true  // Allows editing directly in this branch
+      }
+    },
+    
+    // View showing files specific to a hotfix branch
+    "hotfix": {
+      "name": "Hotfix",
+      "description": "Critical bugfixes",
+      "files": [
+        "src/components/buggy-component.ts",
+        "src/services/problematic-service.ts",
+        "test/**/*.spec.ts"
+      ],
+      "gitBranch": "hotfix/critical-bug",
+      "options": {
+        "numberFiles": true,
+        "showGitBranch": true
+      }
+    },
+    
+    // Compare view - see specific files across branches
+    "compare": {
+      "name": "API Comparison",
+      "description": "API implementation across branches",
+      "files": [
+        "src/api/**/*.ts"
+      ],
+      "options": {
+        "showFullPath": true,
+        "collapseOnOpen": true
+      }
+    }
+  }
+}

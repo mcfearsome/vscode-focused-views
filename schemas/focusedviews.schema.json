@@ -1,0 +1,74 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Focused Views Configuration",
+  "description": "Configuration for the Focused Views VS Code extension",
+  "type": "object",
+  "required": ["version", "views"],
+  "properties": {
+    "version": {
+      "type": "string",
+      "description": "Configuration format version"
+    },
+    "views": {
+      "type": "object",
+      "description": "Collection of view definitions",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["name", "files"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Display name for the view"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the view"
+          },
+          "files": {
+            "type": "array",
+            "description": "List of file patterns to include in the view",
+            "items": {
+              "type": "string"
+            }
+          },
+          "gitBranch": {
+            "type": "string",
+            "description": "Git branch to show files from"
+          },
+          "options": {
+            "type": "object",
+            "description": "View display options",
+            "properties": {
+              "numberFiles": {
+                "type": "boolean",
+                "description": "Show file numbers"
+              },
+              "viewReadme": {
+                "type": "boolean",
+                "description": "Automatically open README files"
+              },
+              "showFullPath": {
+                "type": "boolean",
+                "description": "Show full file paths"
+              },
+              "showGitBranch": {
+                "type": "boolean",
+                "description": "Show git branch information"
+              },
+              "collapseOnOpen": {
+                "type": "boolean",
+                "description": "Collapse this view when opening",
+                "default": false
+              },
+              "allowDirectEdits": {
+                "type": "boolean",
+                "description": "Allow direct edits to files from this branch. If false, a new branch will be created for changes that need to go through a PR.",
+                "default": true
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

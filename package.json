@@ -34,6 +34,27 @@
         "command": "focusedViews.refresh",
         "title": "Refresh",
         "icon": "$(refresh)"
+      },
+      {
+        "command": "focusedViews.createPullRequest",
+        "title": "Focused Views: Create Pull Request from Edit Branch",
+        "icon": "$(git-pull-request)"
+      },
+      {
+        "command": "focusedViews.showEditBranchInfo",
+        "title": "Focused Views: Show Edit Branch Information",
+        "icon": "$(info)"
+      },
+      {
+        "command": "focusedViews.createSampleConfig",
+        "title": "Focused Views: Create Sample Configuration File",
+        "icon": "$(file)"
+      }
+    ],
+    "jsonValidation": [
+      {
+        "fileMatch": [".focusedviews", ".focusedviews.json", ".focusedviews.jsonc"],
+        "url": "./schemas/focusedviews.schema.json"
       }
     ],
     "menus": {
@@ -71,6 +92,6 @@
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
-    "@cue-lang/cue": "^0.7.0"
+    "jsonc-parser": "^3.2.0"
   }
 }

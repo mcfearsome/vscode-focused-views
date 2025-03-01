@@ -1,8 +1,12 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs';
+import * as util from 'util';
+import * as childProcess from 'child_process';
 import { FocusedViewsProvider } from './focusedViewsProvider';
 import { ConfigLoader } from './configLoader';
+
+const execAsync = util.promisify(childProcess.exec);
 
 // Create an output channel for logging
 const outputChannel = vscode.window.createOutputChannel('Focused Views');
@@ -82,7 +86,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 	// Register the command to open a readme
 	context.subscriptions.push(
-		vscode.commands.registerCommand('focusedViews.openReadme', async (viewId) => {
+		vscode.commands.registerCommand('focusedViews.openReadme', async () => {
 			if (!vscode.workspace.workspaceFolders) {
 				return;
 			}
@@ -123,13 +127,13 @@ export function activate(context: vscode.ExtensionContext) {
 			
 			try {
 				// Get the current branch name
-				const { stdout: branchName } = await require('util').promisify(require('child_process').exec)(
+				const { stdout: branchName } = await execAsync(
 					'git rev-parse --abbrev-ref HEAD',
 					{ cwd: workspaceRoot }
 				);
 				
 				// Extract source branch from our naming convention (edit/sourceBranch/...)
-				const match = branchName.trim().match(/^edit\/([^\/]+)\//);
+				const match = branchName.trim().match(/^edit\/([^/]+)\//);
 				if (!match) {
 					vscode.window.showWarningMessage('Current branch does not appear to be an edit branch created by Focused Views.');
 					return;
@@ -140,7 +144,7 @@ export function activate(context: vscode.ExtensionContext) {
 				// Run the command to open GitHub/GitLab/etc to create a PR
 				let remoteUrl: string;
 				try {
-					const { stdout } = await require('util').promisify(require('child_process').exec)(
+					const { stdout } = await execAsync(
 						'git remote get-url origin',
 						{ cwd: workspaceRoot }
 					);
@@ -195,7 +199,7 @@ export function activate(context: vscode.ExtensionContext) {
 			
 			try {
 				// Get the current branch name
-				const { stdout: branchName } = await require('util').promisify(require('child_process').exec)(
+				const { stdout: branchName } = await execAsync(
 					'git rev-parse --abbrev-ref HEAD',
 					{ cwd: workspaceRoot }
 				);
@@ -209,7 +213,7 @@ export function activate(context: vscode.ExtensionContext) {
 				}
 				
 				// Extract source branch from the naming convention
-				const match = branch.match(/^edit\/([^\/]+)\//);
+				const match = branch.match(/^edit\/([^/]+)\//);
 				if (!match) {
 					vscode.window.showInformationMessage(`Current branch: ${branch}`);
 					return;
@@ -330,7 +334,7 @@ export function activate(context: vscode.ExtensionContext) {
 		const workspaceRoot = vscode.workspace.workspaceFolders[0].uri.fsPath;
 		
 		try {
-			const { stdout: branchName } = await require('util').promisify(require('child_process').exec)(
+			const { stdout: branchName } = await execAsync(
 				'git rev-parse --abbrev-ref HEAD',
 				{ cwd: workspaceRoot }
 			);

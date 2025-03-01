@@ -13,6 +13,7 @@ jobs:
     strategy:
       matrix:
         node-version: [16.x, 18.x]
+      fail-fast: false
 
     steps:
     - uses: actions/checkout@v3
@@ -28,9 +29,10 @@ jobs:
     
     - name: Run linting
       run: npm run lint
+      continue-on-error: false
       
     - name: Compile extension
       run: npm run compile
-    
+      
     - name: Run tests
       run: npm run test:unit

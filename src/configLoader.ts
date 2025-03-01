@@ -2,7 +2,7 @@ import * as vscode from 'vscode';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as glob from 'glob';
-import { exec, execSync } from 'child_process';
+import { exec } from 'child_process';
 import { promisify } from 'util';
 
 const execAsync = promisify(exec);
@@ -351,7 +351,7 @@ export class ConfigLoader {
 	 * @param content The content to parse
 	 * @returns The parsed JSON object
 	 */
-	private parseJsonc(content: string): any {
+	private parseJsonc(content: string): Record<string, unknown> {
 		// Remove comments for compatibility (simple implementation)
 		// This is a simplified version and may not handle all edge cases
 		const noComments = content

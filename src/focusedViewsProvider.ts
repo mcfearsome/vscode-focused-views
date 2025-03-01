@@ -1,7 +1,6 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
-import * as fs from 'fs';
-import { ConfigLoader, View } from './configLoader';
+import { ConfigLoader } from './configLoader';
 
 export class FocusedViewItem extends vscode.TreeItem {
 	public id?: string;
